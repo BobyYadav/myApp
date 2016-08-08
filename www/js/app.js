@@ -22,3 +22,21 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+  .config(function($stateProvider, $urlRouterProvider) {
+    $stateProvider
+
+    // setup an abstract state for the tabs directive
+      .state('choose', {
+        url: '/',
+        templateUrl: "html/main.html",
+        controller: 'mainController'
+      })
+
+      // the select image tab has its own child nav-view and history
+      .state('hidden', {
+        url: '/hidden-images',
+        templateUrl: 'html/hidden.html',
+        controller: 'mainController'
+      });
+    $urlRouterProvider.otherwise('/');
+  })
