@@ -1,57 +1,40 @@
 /**
  * Created by 1006883 on 8/8/2016.
  */
-angular.module('starter').controller('mainController',['$scope','$ionicPlatform','$cordovaImagePicker','$cordovaFile', function ($scope,$ionicPlatform,$cordovaImagePicker,$cordovaFile) {
+angular.module('starter').controller('mainController',['$scope','$ionicPlatform','$cordovaImagePicker','$cordovaDatePicker', function ($scope,$ionicPlatform,$cordovaImagePicker,$cordovaDatePicker) {
 
   $ionicPlatform.ready(function () {
 
-    $scope.chooseImage=function () {
-console.log("hi");
+    $scope.selectedCategory={
+      "value":"Choose Category"
+    };
+
+    $scope.categories=["Choose Category","food"]
+
+    $scope.addExpense=function () {
+
+    }
+
+    $scope.addCategory=function () {
+
+    }
+    $scope.selectDate=function () {
       var options = {
-        maximumImagesCount: 1,
-        width: 800,
-        height: 800,
-        quality: 80
+        date: new Date(),
+        mode: 'date', // or 'time'
+        minDate: new Date() - 10000,
+        allowOldDates: true,
+        allowFutureDates: false,
+        doneButtonLabel: 'DONE',
+        doneButtonColor: '#F2F3F4',
+        cancelButtonLabel: 'CANCEL',
+        cancelButtonColor: '#000000'
       };
-      $cordovaImagePicker.getPictures(options).then(function(imageURI) {
 
-        //A hack that you should include to catch bug on Android 4.4 (bug < Cordova 3.5):
-        if (imageURI.substring(0,21)=="content://com.android") {
-          var photo_split=imageURI.split("%3A");
-          imageURI="content://media/external/images/media/"+photo_split[1];
-        }
+        $cordovaDatePicker.show(options).then(function(date){
+          alert(date);
 
-        window.resolveLocalFileSystemURI(imageURI, function(fileEntry) {
-
-          //If this doesn't work
-          $scope.image = fileEntry.nativeURL;
-          var newFileUri  = cordova.file.dataDirectory + "images/";
-          var oldFileUri  = imageURI;
-          var fileExt     = "." + oldFileUri.split('.').pop();
-
-          var newFileName = guid("car") + fileExt;
-          window.resolveLocalFileSystemURL(cordova.file.dataDirectory,
-            function(dirEntry) {
-              // move the file to a new directory and rename it
-              fileEntry.moveTo(dirEntry, newFileName, successCallback, errorCallback);
-            },
-            errorCallback);
-
-          //Try this
-          //var image = document.getElementById('myImage');
-          //image.src = fileEntry.nativeURL;
-        });
-      });
-    }
-
-    function successCallback(entry) {
-      console.log("New Path: " + entry.fullPath);
-      alert("Success. New Path: " + entry.fullPath);
-    }
-
-    function errorCallback(error) {
-      console.log("Error:" + error.code)
-      alert(error.code);
+      }, false);
     }
 
   })
