@@ -3,7 +3,7 @@ var db = null;
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic','ngCordova'])
+angular.module('starter', ['ionic','ngCordova', 'ionic-datepicker'])
 
 .run(function($ionicPlatform,$cordovaSQLite) {
   $ionicPlatform.ready(function() {
@@ -21,9 +21,11 @@ angular.module('starter', ['ionic','ngCordova'])
       StatusBar.styleDefault();
     }
 
-    db = $cordovaSQLite.openDB("my.db");
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS expense (id integer primary key, amount text, category text, date date)");
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS category (categoryId integer primary key, category text)");
+   /* db = $cordovaSQLite.openDB("My DB");*/
+    /*$cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS expense (id integer primary key, amount text, category text, date date)");
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS category (categoryId integer primary key, category text)");*/
+
+
   });
 })
   .config(function($stateProvider, $urlRouterProvider) {
@@ -48,4 +50,23 @@ angular.module('starter', ['ionic','ngCordova'])
         controller: 'mainController'
       });
     $urlRouterProvider.otherwise('/');
+  })
+  .config(function (ionicDatePickerProvider) {
+    var datePickerObj = {
+      inputDate: new Date(),
+      setLabel: 'Set',
+      todayLabel: 'Today',
+      closeLabel: 'Close',
+      mondayFirst: false,
+      weeksList: ["S", "M", "T", "W", "T", "F", "S"],
+      monthsList: ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"],
+      templateType: 'popup',
+      from: new Date(2012, 8, 1),
+      to: new Date(2018, 8, 1),
+      showTodayButton: true,
+      dateFormat: 'dd MMMM yyyy',
+      closeOnSelect: false,
+      disableWeekdays: [6]
+    };
+    ionicDatePickerProvider.configDatePicker(datePickerObj);
   })
