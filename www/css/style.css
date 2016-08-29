@@ -1,1 +1,4 @@
 /* Empty. Add your own CSS if you like */
+.round{
+  border-radius: 50% !important;
+}

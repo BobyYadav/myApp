@@ -1,0 +1,41 @@
+<ion-view>
+  <ion-nav-bar class="bar bar-positive">
+    <ion-nav-back-button style="width: 15%" class="button button-assertive">
+
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-pane>
+    <div class="bar bar-subheader bar-dark">
+      <button class="button button-clear" ng-click="back()">
+        <i class="ion-arrow-left-c"></i>
+      </button>
+      <h2 class="title">{{employee.name}}</h2>
+    </div>
+    <ion-content class="has-subheader padding has-header">
+
+        <div class="row">
+          <div class="col col-33">Name </div>
+          <div class="col">:  {{employee.name}}</div>
+        </div>
+      <div class="row">
+          <div class="col col-33">Contact </div>
+          <div class="col">:  {{employee.contact}}</div>
+        </div>
+      <div class="row">
+          <div class="col col-33">Employee Id </div>
+          <div class="col">:  {{employee.Employee_id}}</div>
+        </div>
+      <div class="row">
+          <div class="col col-33">Email Id </div>
+          <div class="col">:  {{employee.email_id}}</div>
+        </div>
+      <div class="row">
+          <div class="col col-33">Team </div>
+          <div class="col">:  {{employee.team}}</div>
+        </div>
+
+    </ion-content>
+  </ion-pane>
+</ion-view>
+
+

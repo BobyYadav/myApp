@@ -1,0 +1,19 @@
+<ion-view>
+<ion-pane>
+  <label class=" bar bar-subheader bar-dark">
+    <input type="text" class="dark-bg" style="color: white" placeholder="Search Contact"  ng-model="searchFilter">
+  </label>
+  <ion-content class="padding has-header has-subheader responsive-sm">
+    {{contacts}}
+    <ion-list>
+   <ion-item ng-repeat="contact in contacts track by contact.Employee_id | filter: {'name':searchFilter} | orderBy : 'name' " class="item-borderless">
+   <a class="button button-clear item" style="padding: 2%; padding-left: 5%; text-decoration: none" ui-sref={{contact.url}}><h2>{{contact.name}}</h2></a>
+       <button ng-click="call(contact.contact)" class="button button-balanced round" style="float: right; margin-right: 3%; width: 10% "><i class="icon ion-android-call"></i></button>
+</ion-item>
+</ion-list>
+  </ion-content>
+</ion-pane>
+</ion-view>
+
+
+
